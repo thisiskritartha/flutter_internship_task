@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:internship/views/cart_tile.dart';
 
 class LocaleString extends Translations {
   @override

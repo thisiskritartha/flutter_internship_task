@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
-import 'package:internship/views/product_list.dart';
-import 'package:internship/views/product_tile.dart';
 import 'package:internship/widgets/grid_views.dart';
 import 'package:internship/widgets/product_views.dart';
 import '../controllers/produtct_controller.dart';

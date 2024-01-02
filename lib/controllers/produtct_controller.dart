@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:get/get.dart';
 import 'package:internship/services/remote_services.dart';
 import '../models/product.dart';
@@ -25,7 +23,7 @@ class ProductController extends GetxController {
 
   // Fetch products from the remote API
   void fetchProduct() async {
-    var products = await RemoteServices
+    List<Product>? products = await RemoteServices
         .fetchProducts(); // Use the RemoteServices class to fetch products
 
     productList.value =
