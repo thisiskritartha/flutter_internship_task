@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:internship/controllers/produtct_controller.dart';
@@ -30,9 +31,14 @@ class ProductList extends StatelessWidget {
           child: ListTile(
             leading: Hero(
               tag: heroTag,
-              child: Image.network(
-                product.image,
-                fit: BoxFit.cover,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: CachedNetworkImage(
+                  imageUrl: product.image,
+                  height: 50,
+                  width: 50,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             title: Text(

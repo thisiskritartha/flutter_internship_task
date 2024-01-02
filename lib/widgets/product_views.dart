@@ -15,8 +15,8 @@ class ProductViews extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              'OnlineStore',
-              style: TextStyle(
+              'onlineStore'.tr,
+              style: const TextStyle(
                 fontSize: 32.0,
                 fontWeight: FontWeight.w900,
               ),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:internship/controllers/produtct_controller.dart';
@@ -15,74 +16,141 @@ class Detail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: Text(
-            'Details Page',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              letterSpacing: 1.4,
-            ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'detailPage'.tr,
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+            letterSpacing: 1.4,
           ),
-          elevation: 0,
-          centerTitle: true,
         ),
-        // extendBodyBehindAppBar: true,
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Hero(
-                tag: tag,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20.0),
-                      bottomRight: Radius.circular(20.0),
+        elevation: 0,
+        centerTitle: true,
+      ),
+      body: orientation == Orientation.landscape
+          ? SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Hero(
+                    tag: tag,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0),
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl: product.image,
+                          height: height,
+                          width: width * 0.3,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
-                    child: Image.network(
-                      product.image,
-                      height: 360,
-                      fit: BoxFit.cover,
-                      alignment: Alignment.topCenter,
+                  ),
+                  SizedBox(width: width * 0.1),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product.title,
+                          textAlign: TextAlign.start,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          '${product.price}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 16.0,
+                            color: Colors.grey[800],
+                          ),
+                        ),
+                        SizedBox(
+                          height: height * 0.06,
+                        ),
+                        Text(
+                          product.description,
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            height: 1.4,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
+                  FavIcon(product: product),
+                ],
               ),
-              const SizedBox(height: 30),
-              ListTile(
-                title: Text(
-                  product.title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    color: Colors.black,
+            )
+          : SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Hero(
+                    tag: tag,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0),
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl: product.image,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-                subtitle: Text(
-                  '\$${product.price}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16.0,
-                    color: Colors.grey[800],
+                  const SizedBox(height: 30),
+                  ListTile(
+                    title: Text(
+                      product.title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                    subtitle: Text(
+                      '\$${product.price}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16.0,
+                        color: Colors.grey[800],
+                      ),
+                    ),
+                    trailing: FavIcon(product: product),
                   ),
-                ),
-                trailing: FavIcon(product: product),
+                  Padding(
+                    padding: const EdgeInsets.all(18),
+                    child: Text(
+                      product.description,
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        height: 1.4,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(18),
-                child: Text(
-                  product.description,
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    height: 1.4,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ));
+            ),
+    );
   }
 }

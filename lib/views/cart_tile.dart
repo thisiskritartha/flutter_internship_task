@@ -23,8 +23,8 @@ class CartList extends StatelessWidget {
           },
         ),
         title: Text(
-          'Cart List',
-          style: TextStyle(
+          'cartList'.tr,
+          style: const TextStyle(
             fontWeight: FontWeight.w600,
             letterSpacing: 1.4,
           ),
@@ -35,7 +35,7 @@ class CartList extends StatelessWidget {
             onPressed: () {
               productController.clearCartList();
             },
-            icon: Icon(Icons.clear_sharp),
+            icon: const Icon(Icons.clear_sharp),
           )
         ],
       ),

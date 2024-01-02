@@ -13,10 +13,13 @@ class CustomGridViews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
     return Expanded(
       child: Obx(
         () => MasonryGridView.count(
-          crossAxisCount: productController.isTile.value ? 2 : 1,
+          crossAxisCount: orientation == Orientation.portrait
+              ? (productController.isTile.value ? 2 : 1)
+              : (productController.isTile.value ? 3 : 1),
           crossAxisSpacing: 4,
           mainAxisSpacing: 4,
           itemCount: list.length,
