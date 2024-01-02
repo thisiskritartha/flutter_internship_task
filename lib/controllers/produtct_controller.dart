@@ -23,16 +23,21 @@ class ProductController extends GetxController {
 
   void addToCart(Product product) {
     if (!cartList.contains(product)) cartList.add(product);
-    // cartList.forEach((element) {
-    //   print(element.title);
-    // });
+
+    Get.snackbar('Cart List', '${product.title} added to cart successfully.');
   }
 
   void removeFromCart(Product product) {
     if (cartList.contains(product)) cartList.remove(product);
+    Get.snackbar(
+        'Cart List', '${product.title} from cart list removed successfully.');
   }
 
   void clearCartList() {
     cartList.clear();
+    Get.snackbar(
+      'Cart List',
+      'Cart list cleared successfully.',
+    );
   }
 }
